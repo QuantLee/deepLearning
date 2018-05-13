@@ -19,7 +19,8 @@ class LeNet:
     def build(input_shape, classes):
         model = Sequential()
         # CONV => RELU => POOL
-        model.add(Conv2D(20, kernel_size=5, padding='same', input_shape=input_shape))
+        model.add(Conv2D(20, kernel_size=5,
+                         padding='same', input_shape=input_shape))
         model.add(Activation('relu'))
         model.add(MaxPooling2D(pool_size=(2, 2), strides=(2, 2)))
         # CONV => RELU => POOL
@@ -37,8 +38,8 @@ class LeNet:
 
 
 # set constant value and finish training and testing
-EPOCHS = 20
-BATCHS = 128
+EPOCH_SIZE = 20
+BATCH_SIZE = 128
 VERBOSE = 1
 OPTIMIZER = Adam()
 VALIDATION_SPLIT = 0.2
@@ -66,8 +67,10 @@ y_test = np_utils.to_categorical(y_test, CLASSES)
 
 # initialize the optimizer and train the model
 model = LeNet.build(input_shape=INPUT_SHAPE, classes=CLASSES)
-model.compile(loss="categorical_crossentropy", optimizer=OPTIMIZER, metrics=['accuracy'])
-history = model.fit(X_train, y_train, batch_size=BATCHS, epochs=EPOCHS, verbose=VERBOSE, validation_split=VALIDATION_SPLIT)
+model.compile(loss="categorical_crossentropy",
+              optimizer=OPTIMIZER, metrics=['accuracy'])
+history = model.fit(X_train, y_train, batch_size=BATCH_SIZE, epochs=EPOCH_SIZE,
+                    verbose=VERBOSE, validation_split=VALIDATION_SPLIT)
 score = model.evaluate(X_test, y_test, verbose=VERBOSE)
 print("Test score:", score[0])
 print('Test accuracy:', score[1])
