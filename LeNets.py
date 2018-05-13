@@ -38,7 +38,7 @@ class LeNet:
 
 
 # set constant value and finish training and testing
-EPOCH_SIZE = 20
+EPOCH_SIZE = 30
 BATCH_SIZE = 128
 VERBOSE = 1
 OPTIMIZER = Adam()
